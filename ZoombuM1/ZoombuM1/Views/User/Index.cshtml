@@ -1,0 +1,50 @@
+﻿@model ZoombuM1.Models.ZoombuViewModel
+@{
+    ViewBag.Title = "Profil";
+}
+
+<fieldset>
+    <legend>@Model.Profil.Firstname @Model.Profil.Lastname</legend>
+
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Profil.Department) :
+        @Html.DisplayFor(model => model.Profil.Department)
+    </div>
+    
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Profil.Title) :
+        @Html.DisplayFor(model => model.Profil.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Profil.Email) :
+         @Html.DisplayFor(model => model.Profil.Email)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Profil.DateOfBirth) :
+        @Html.DisplayFor(model => model.Profil.DateOfBirth)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Profil.Gender) :
+        @Html.DisplayFor(model => model.Profil.Gender)
+    </div>
+    <br />
+    @{
+        <!-- Check user group (with user profil and user connected) -->
+        var checkGroupShare = Model.User.Group.Join(Model.Profil.Group, u => u.Id, u2 => u2.Id, (u, u2) => u).ToList();
+
+        <!-- Follow if share group -->
+        if (checkGroupShare.Count() != 0)
+        {
+            if (Model.User.Follow.FirstOrDefault(u => u.Id == Model.Profil.Id) == null)
+            {
+                @Html.ActionLink("Follow", "../Group/Follow", new { id = Model.Profil.Id }, new {@class="btn btn-danger"})
+            }
+            else{
+                @Html.ActionLink("Unfollow", "../Group/RemoveFollow", new { id = Model.Profil.Id }, new {@class="btn btn-danger"})
+            }
+        }
+    }
+     
+</fieldset>

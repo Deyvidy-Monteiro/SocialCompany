@@ -1,0 +1,65 @@
+﻿@model ZoombuM1.Models.ZoombuViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+<div id="rightContainer">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <p class="title">Profil</p>
+                @{
+                    @Html.DisplayTextFor(model => model.User.Firstname)
+                    @: 
+                    @Html.DisplayTextFor(model => model.User.Lastname)
+                    <br />
+                    @Html.DisplayTextFor(model => model.User.Department)
+                    @:-
+                    @Html.DisplayTextFor(model => model.User.Title)
+                }
+                <br /><br />
+                <p class="title">Groups</p>
+                @{
+                    if(Model.User.Group != null){
+                        foreach (var item in Model.User.Group.ToList())
+                        {
+                            @Html.ActionLink(item.Name, "../Group/Wall", new { id = item.Id }) <br />
+                        }
+                    }
+                    <br />
+                    @Html.ActionLink("Create a new group", "../Group/Create")
+                }
+            </div>
+    
+            <div class="span10">
+                <h4>Result of search:</h4><br />
+                <span style="color: #3E0032; font-weight: bold;">Users: </span><br />
+                @{
+                  if(Model.Users != null){
+                    if(Model.Users.Count() != 0){
+                        foreach(var item in Model.Users){       
+                            @Html.ActionLink(item.Firstname + " " + item.Lastname, "../User/index", new { id = item.Id })<br />
+                        }
+                    }else{
+                        @: No result.
+                    } 
+                  } 
+                }
+                <br /> <br />
+                <span style="color: #3E0032; font-weight: bold;"> Posts: </span><br />
+                @{
+                  if(Model.Posts != null){
+                    if(Model.Posts.Count() != 0){
+                        foreach(var item in Model.Posts){       
+                            @item.Content @: - @item.DateOfCreation <br />
+                        }
+                    }else{
+                    @: No result.
+                    } 
+                  } 
+                }
+            </div>
+        </div>
+    </div>      
+</div>
+

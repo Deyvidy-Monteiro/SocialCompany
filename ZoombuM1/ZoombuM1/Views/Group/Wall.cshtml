@@ -1,0 +1,245 @@
+﻿@model ZoombuM1.Models.ZoombuViewModel
+
+@{
+    ViewBag.Title = "Group";
+}
+
+<div id="rightContainer">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">              
+                <p class="title">Profil</p>
+                <!-- User - Information -->
+                @{
+                    @Html.DisplayTextFor(model => model.User.Firstname)
+                    @: 
+                    @Html.DisplayTextFor(model => model.User.Lastname)
+                    <br />
+                    @Html.DisplayTextFor(model => model.User.Department)
+                    @:-
+                    @Html.DisplayTextFor(model => model.User.Title)
+                }
+                <br /><br />
+                <p class="title" >Groups</p>
+                <!-- Group - List user's group -->
+                @{
+                    if(Model.Groups != null){
+                        foreach (var item in Model.Groups)
+                        {
+                            @Html.ActionLink(item.Name, "../Group/Wall", new { id = item.Id })<br />
+                        }
+                    }
+                    <br />
+                    @Html.ActionLink("Create a new group", "../Group/Create")
+                }
+            </div>
+    
+            <div class="span10">
+                <h4 style="color: #3E0032;">Group: @Html.DisplayTextFor(model => model.Group.Name)</h4>
+                <!-- Leave this group -->
+                @{
+                    if(Model.User.Id != Model.Group.UserOwnerId){
+                        @Html.ActionLink("Leave this group", "../Group/RemoveUserFromGroup", new { id = Model.User.Id }) 
+                    }                 
+                } 
+                <div style="margin-top: 50px;">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active"><a href="#wall" data-toggle="tab">Wall</a></li>
+                        <li class=""><a href="#information" data-toggle="tab">Informations</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="wall">
+                            <div class="editor-label">
+                                <span style="color: #333333; font-weight: bold;">Express yourself:</span>
+                            </div>
+                            <!-- Form - Send a Post -->
+                            @using (Html.BeginForm("Post", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.ValidationSummary(true)
+
+                                @Html.EditorFor(model => model.Post.Content)
+                                @Html.ValidationMessageFor(model => model.Post.Content)
+                                @Html.HiddenFor(model => model.Group.Id)
+                               
+                                <input type="file" id="fileUpload" name="fileUpload" />  <br />
+                                <input type="submit" class="btn btn-danger" value="Send" />
+                            }
+                
+                            <!-- Display Post / Comments and Likes -->
+                            @{
+                                if(Model.Posts != null){
+                                    var checkAlreadyLike = 0;
+                                    foreach (var item in Model.Posts)
+                                    {
+                                        <span style="color: #D71108; font-weight: bold;">@item.User.Firstname @item.User.Lastname | @item.User.Title-@item.User.Department</span><br />
+                                        <span style="color: #3E0032;">@item.Content</span>
+                                        <br />
+                                        if(item.Picture != null){
+                                            <img style="max-height: 400px; max-width: 400px;" src="@item.Picture" /><br />
+                                        }
+                                        <span style="font-size: 11px">
+                                            @foreach(var Like in item.Likes){
+                                                if(Like.UserId == Model.User.Id){
+                                                    checkAlreadyLike = Like.Id;
+                                                }
+                                            }
+                                            @if (checkAlreadyLike != 0)
+                                            {
+                                                @item.Likes.Count()  @:Like(s) (@Html.ActionLink("Unlike", "../Group/UnLike", new { id = checkAlreadyLike })) | @item.DateOfCreation |
+                                            }
+                                            else{
+                                                @item.Likes.Count()  @Html.ActionLink("Like(s)", "../Group/Like", new { id = item.Id }) @:| @item.DateOfCreation |
+                                            }
+                                            @if(item.UserId == Model.User.Id){
+                                                @Html.ActionLink("Delete this post", "../Group/DeletePost", new { id = item.Id }) 
+                                            }
+                                            @{
+                                                checkAlreadyLike = 0;
+                                            }
+                                        </span>
+                                        <br />
+                                        if(item.Comments.Count() != 0){
+                                            <div style="margin-left: 20px;">
+                                                @foreach(var oneComment in  item.Comments){
+                                                    <span style="color:#3E0032; font-weight: bold;">@oneComment.User.Firstname @oneComment.User.Lastname</span>
+                                                    @oneComment.Commentaire
+                                                    <br />
+                                                    <span style="font-size: 9px;">At @oneComment.DateOfCreation |
+                                                        @if (oneComment.UserId == Model.User.Id)
+                                                        {
+                                                            @Html.ActionLink("Delete this comment", "../Group/DeleteComment", new { id = oneComment.Id }) 
+                                                        }
+                                                    </span><br />
+                                                }
+                                                
+                                                <!-- Form - Send a Comment -->
+                                                @using (Html.BeginForm("Comment", "Group")) {
+                                                    @Html.ValidationSummary(true)
+                                                    <div class="editor-field">
+                                                        @Html.EditorFor(model => model.Comment.Commentaire)
+                                                        @Html.ValidationMessageFor(model => model.Comment.Commentaire)
+                                                    </div>
+                                                    @Html.HiddenFor(model => model.Group.Id)
+                                                    Model.Comment.PostId = item.Id;
+                                                    
+                                                    @Html.HiddenFor(model => model.Comment.PostId)
+                                                    <input type="submit" class="btn btn-danger" value="Comment" />
+                                                }                                               
+                                            </div> 
+                                        }else{
+                                            <!-- Form - Send a Comment -->
+                                            using (Html.BeginForm("Comment", "Group")) {
+                                                @Html.ValidationSummary(true)
+                                                <div class="editor-field">
+                                                    @Html.EditorFor(model => model.Comment.Commentaire)
+                                                    @Html.ValidationMessageFor(model => model.Comment.Commentaire)
+                                                </div>
+                                                @Html.HiddenFor(model => model.Group.Id)
+                                                Model.Comment.PostId = item.Id;
+                                                @Html.HiddenFor(model => model.Comment.PostId)
+                                                <input type="submit" class="btn btn-danger" value="Comment" />
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                        </div>
+                        
+                        <!-- Display information about a group (members, remove users, group, follow) -->
+                        <div class="tab-pane fade" id="information">
+                            @if (Model.Group != null)
+                                {
+                                @:Member List: <br /><br />
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                          <th>First Name</th>
+                                          <th>Last Name</th>
+                                          <th>Title</th>
+                                          <th>Department</th>
+                                          <th>Action</th>
+                                        </tr>
+                                     </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Group.Users)
+                                        {
+                                            if (Model.User.Id != item.Id)
+                                            {
+                                                <tr>
+                                                    <td>@Html.ActionLink(item.Firstname, "../User/Index", new { id = item.Id })</td>
+                                                    <td>@item.Lastname</td>
+                                                    <td>@item.Title</td>
+                                                    <td>@item.Department</td>
+                                                    <td>
+                                                        @{                                                          
+
+                                                            if (Model.User.Follow.FirstOrDefault(u => u.Id == item.Id) != null)
+                                                            {
+                                                                 @Html.ActionLink("Unfollow", "../Group/RemoveFollow", new { id = item.Id })
+                                                            }else{
+                                                                 @Html.ActionLink("Follow", "../Group/Follow", new { id = item.Id })
+                                                            }
+                                                       
+                                                            if(Model.Group.UserOwnerId == Model.User.Id){                                    
+                                                                @:| @Html.ActionLink("Remove from this group", "../Group/RemoveUserFromGroup", new { id = item.Id }) 
+                                                            }
+                                                          }
+                                                    </td>
+                                                </tr>                                                 
+                                            }         
+                                         }
+                                      </tbody>
+                                    </table>
+                                  
+                                if (Model.Users != null && Model.Group.UserOwnerId == Model.User.Id)
+                                {
+                                        @:Add member: <br /><br />
+                                        <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                              <th>First Name</th>
+                                              <th>Last Name</th>
+                                              <th>Title</th>
+                                              <th>Department</th>
+                                              <th>Action</th>
+                                            </tr>
+                                         </thead>
+                                         <tbody>
+                                            
+                                             <!-- Pour chaque utilisateur -->
+                                            @foreach (var userItem in Model.Users)
+                                            {
+
+                                                if (userItem.Group != null)
+                                                {
+
+                                                    Boolean checkUser = false;
+                                                    foreach (var groupItem in userItem.Group){
+                                                        
+                                                        if(groupItem.Id == Model.Group.Id){
+                                                            checkUser = true;
+                                                        }
+                                                    }
+                                                    if(checkUser == false){
+                                                        <tr>
+                                                            <td>@Html.ActionLink(userItem.Firstname, "../User/Index", new { id = userItem.Id })</td>
+                                                            <td>@userItem.Lastname</td>
+                                                            <td>@userItem.Title</td>
+                                                            <td>@userItem.Department</td>
+                                                            <td>@Html.ActionLink("Add to group", "../Group/AddUserToGroup", new { id = userItem.Id }) </td>
+                                                        </tr>  
+                                                    }                                     
+                                                }         
+                                             }
+                                          </tbody>
+                                    </table>
+                                    @Html.ActionLink("Delete this group", "../Group/DeleteGroup", new { id = Model.Group.Id })
+                                }
+                             }
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>      
+</div>

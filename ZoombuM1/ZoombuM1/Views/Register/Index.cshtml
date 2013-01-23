@@ -1,0 +1,86 @@
+﻿@model ZoombuM1.ServiceReference1.User
+
+@{
+    ViewBag.Title = "Register - Zoombu";
+}
+
+<div style="margin-top: 25px;">
+    <div style="padding: 10px;">
+        <div style="margin-left: -20px;">
+            @using (Html.BeginForm()) {
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>Register</legend>
+
+                     <div class="editor-label">
+                        @Html.LabelFor(model => model.Firstname)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Firstname)
+                        @Html.ValidationMessageFor(model => model.Firstname)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Lastname)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Lastname)
+                        @Html.ValidationMessageFor(model => model.Lastname)
+                    </div>
+        
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Email)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Password)
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(model => model.Password)
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DateOfBirth)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.DateOfBirth)
+                        @Html.ValidationMessageFor(model => model.DateOfBirth)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Gender)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Gender)
+                        @Html.ValidationMessageFor(model => model.Gender)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Department)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Department)
+                        @Html.ValidationMessageFor(model => model.Department)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Title)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Title)
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+
+                    <p>
+                        <input type="submit" value="Subscribe" class="btn btn-danger" />
+                    </p>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>

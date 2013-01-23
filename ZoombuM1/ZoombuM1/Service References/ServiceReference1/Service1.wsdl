@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:3192/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:3192/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:3192/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ZoombuM1Service.DAL.entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUserByEmailAndPass_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByEmailAndPass" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUserByEmailAndPass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByEmailAndPassResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUserById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserById" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUserById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUserByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByName" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUserByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddUserToGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserToGroup" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddUserToGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserToGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveUserFromGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromGroup" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveUserFromGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddFollow_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddFollow" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddFollow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddFollowResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveFollow_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFollow" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveFollow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFollowResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetGroupById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupById" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetGroupById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroup" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGroup" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreatePost_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePost" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreatePost_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePostResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPostByGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostByGroup" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPostByGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostByGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPostById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostById" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPostById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPostByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostByName" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPostByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeletePost_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePost" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeletePost_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePostResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPostFollow_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostFollow" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPostFollow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostFollowResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddPictureToAPost_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPictureToAPost" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddPictureToAPost_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPictureToAPostResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateLike_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateLike" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateLike_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateLikeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteLike_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteLike" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteLike_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteLikeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetLikeById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikeById" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetLikeById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikeByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateComment_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateComment" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateComment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteComment_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteComment" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteComment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCommentById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentById" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCommentById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentByIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Create" message="tns:IService1_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateResponse" message="tns:IService1_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByEmailAndPass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetUserByEmailAndPass" message="tns:IService1_GetUserByEmailAndPass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetUserByEmailAndPassResponse" message="tns:IService1_GetUserByEmailAndPass_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetUserById" message="tns:IService1_GetUserById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetUserByIdResponse" message="tns:IService1_GetUserById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetUserByName" message="tns:IService1_GetUserByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetUserByNameResponse" message="tns:IService1_GetUserByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllUser" message="tns:IService1_GetAllUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllUserResponse" message="tns:IService1_GetAllUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddUserToGroup" message="tns:IService1_AddUserToGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddUserToGroupResponse" message="tns:IService1_AddUserToGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RemoveUserFromGroup" message="tns:IService1_RemoveUserFromGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RemoveUserFromGroupResponse" message="tns:IService1_RemoveUserFromGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFollow">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddFollow" message="tns:IService1_AddFollow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddFollowResponse" message="tns:IService1_AddFollow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFollow">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RemoveFollow" message="tns:IService1_RemoveFollow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RemoveFollowResponse" message="tns:IService1_RemoveFollow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetGroupById" message="tns:IService1_GetGroupById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetGroupByIdResponse" message="tns:IService1_GetGroupById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteGroup" message="tns:IService1_DeleteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteGroupResponse" message="tns:IService1_DeleteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateGroup" message="tns:IService1_CreateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateGroupResponse" message="tns:IService1_CreateGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePost">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreatePost" message="tns:IService1_CreatePost_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreatePostResponse" message="tns:IService1_CreatePost_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPostByGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPostByGroup" message="tns:IService1_GetPostByGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPostByGroupResponse" message="tns:IService1_GetPostByGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPostById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPostById" message="tns:IService1_GetPostById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPostByIdResponse" message="tns:IService1_GetPostById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPostByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPostByName" message="tns:IService1_GetPostByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPostByNameResponse" message="tns:IService1_GetPostByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePost">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeletePost" message="tns:IService1_DeletePost_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeletePostResponse" message="tns:IService1_DeletePost_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPostFollow">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPostFollow" message="tns:IService1_GetPostFollow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPostFollowResponse" message="tns:IService1_GetPostFollow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPictureToAPost">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddPictureToAPost" message="tns:IService1_AddPictureToAPost_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddPictureToAPostResponse" message="tns:IService1_AddPictureToAPost_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateLike">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateLike" message="tns:IService1_CreateLike_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateLikeResponse" message="tns:IService1_CreateLike_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLike">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteLike" message="tns:IService1_DeleteLike_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteLikeResponse" message="tns:IService1_DeleteLike_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLikeById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetLikeById" message="tns:IService1_GetLikeById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetLikeByIdResponse" message="tns:IService1_GetLikeById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateComment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateComment" message="tns:IService1_CreateComment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateCommentResponse" message="tns:IService1_CreateComment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteComment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteComment" message="tns:IService1_DeleteComment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteCommentResponse" message="tns:IService1_DeleteComment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommentById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCommentById" message="tns:IService1_GetCommentById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCommentByIdResponse" message="tns:IService1_GetCommentById_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/IService1/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByEmailAndPass">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetUserByEmailAndPass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserById">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetUserById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetUserByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToGroup">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddUserToGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromGroup">
+      <soap:operation soapAction="http://tempuri.org/IService1/RemoveUserFromGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFollow">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddFollow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFollow">
+      <soap:operation soapAction="http://tempuri.org/IService1/RemoveFollow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupById">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetGroupById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeleteGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <soap:operation soapAction="http://tempuri.org/IService1/CreateGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePost">
+      <soap:operation soapAction="http://tempuri.org/IService1/CreatePost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPostByGroup">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPostByGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPostById">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPostById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPostByName">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPostByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePost">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeletePost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPostFollow">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPostFollow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPictureToAPost">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddPictureToAPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLike">
+      <soap:operation soapAction="http://tempuri.org/IService1/CreateLike" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLike">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeleteLike" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLikeById">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetLikeById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateComment">
+      <soap:operation soapAction="http://tempuri.org/IService1/CreateComment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteComment">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeleteComment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommentById">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCommentById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://localhost:3192/Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

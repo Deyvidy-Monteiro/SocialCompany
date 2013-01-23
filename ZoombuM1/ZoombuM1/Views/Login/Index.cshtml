@@ -1,0 +1,24 @@
+﻿@model ZoombuM1.ServiceReference1.User
+
+@{
+    ViewBag.Title = "Zoombu - Connection";
+}
+
+<div id="login">
+    <div style="padding: 10px;">
+        <h4>Connection: </h4>
+        <div style="margin-left: 220px;">
+                @using (Html.BeginForm())
+                {
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email)
+
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password)
+                    <br />
+                    <input type="submit" value="Login" />
+                    @Html.ValidationSummary()
+                }
+        </div>             
+    </div>
+</div>

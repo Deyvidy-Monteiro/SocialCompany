@@ -1,0 +1,78 @@
+﻿@model ZoombuM1.Models.ZoombuViewModel
+
+@{
+    ViewBag.Title = "Home";
+}
+<div id="rightContainer">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <p class="title">Profil</p>
+                @{
+                    @Html.DisplayTextFor(model => model.User.Firstname)
+                    @: 
+                    @Html.DisplayTextFor(model => model.User.Lastname)
+                    <br />
+                    @Html.DisplayTextFor(model => model.User.Department)
+                    @:-
+                    @Html.DisplayTextFor(model => model.User.Title)
+                }
+                <br /><br />
+                <p class="title">Groups</p>
+                @{
+                    if(Model.User.Group != null){
+                        foreach (var item in Model.User.Group.ToList())
+                        {
+                            @Html.ActionLink(item.Name, "../Group/Wall", new { id = item.Id }) <br />
+                        }
+                    }
+                    <br />
+                    @Html.ActionLink("Create a new group", "../Group/Create")
+                }
+            </div>
+    
+            <div class="span10">
+                <!-- Display Post and Likes -->
+                <h5>News : </h5><br />
+                @{
+                    if(Model.Posts != null){
+                        var checkAlreadyLike = 0;
+                        foreach (var item in Model.Posts)
+                        {
+                            <span style="color: #D71108; font-weight: bold;">@item.User.Firstname @item.User.Lastname | @item.User.Title-@item.User.Department</span><br />
+                            <span style="color: #3E0032;">@item.Content</span>
+                            <br />
+                            if(item.Picture != null){
+                                <img style="max-height: 400px; max-width: 400px;" src="@item.Picture" />
+                            }
+                            <br />
+                            <span style="font-size: 11px">
+                                <!-- For each Like... -->
+                                @foreach(var Like in item.Likes){
+                                    if(Like.UserId == Model.User.Id){
+                                        checkAlreadyLike = Like.Id;
+                                    }
+                                }
+                                @if (checkAlreadyLike != 0)
+                                {
+                                    @item.Likes.Count()  @:Like(s) (@Html.ActionLink("Unlike", "../Group/UnLike", new { id = checkAlreadyLike })) | @item.DateOfCreation |
+                                }
+                                else{
+                                    @item.Likes.Count()  @Html.ActionLink("Like(s)", "../Group/Like", new { id = item.Id }) @:| @item.DateOfCreation |
+                                }
+                                @if(item.UserId == Model.User.Id){
+                                    @Html.ActionLink("Delete this post", "../Group/DeletePost", new { id = item.Id }) 
+                                }
+                                @{
+                                    checkAlreadyLike = 0;
+                                }
+                            </span>
+                            <br />
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>      
+</div>
+
